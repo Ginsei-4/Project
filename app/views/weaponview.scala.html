@@ -1,0 +1,25 @@
+@(weapons: List[Weapon])
+
+@import helper._
+
+@main("Weapon list") {
+    
+    <h1>@weapons.size weapon(s)</h1>
+    
+    <ul>
+        @weapons.map { w =>
+            <li>
+            	@w.id
+                @w.wType
+                @w.producer
+        		@w.wModel
+        		@w.status 
+                @form(routes.WeaponController.deleteWeapon(w.id.get)) {
+                    <input type="submit" value="Delete">
+                }
+            </li>
+        }
+    </ul>
+    
+    
+}

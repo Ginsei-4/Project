@@ -1,0 +1,27 @@
+@(vehicles: List[Vehicle])
+
+@import helper._
+
+@main("Person list") {
+    
+    <h1>@vehicles.size vehicles(s)</h1>
+    
+    <ul>
+        @vehicles.map { v =>
+            <li>
+            	@v.id
+                @v.technumber
+                @v.vType
+        		@v.producer
+        		@v.vModel
+        		@v.stolen
+        		@v.wanted 
+                @form(routes.VehicleController.deleteVehicle(v.id.get)) {
+                    <input type="submit" value="Delete">
+                }
+            </li>
+        }
+    </ul>
+    
+    
+}

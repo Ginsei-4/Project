@@ -1,0 +1,26 @@
+@(persons: List[Person])
+
+@import helper._
+
+@main("Person list") {
+    
+    <h1>@persons.size person(s)</h1>
+    
+    <ul>
+        @persons.map { pers =>
+            <li>
+            	@pers.id
+                @pers.name
+                @pers.midname
+        		@pers.lastname
+        		@pers.passport
+        		@pers.wanted 
+                @form(routes.PersonController.deletePerson(pers.id.get)) {
+                    <input type="submit" value="Delete">
+                }
+            </li>
+        }
+    </ul>
+    
+    
+}

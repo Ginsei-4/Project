@@ -1,0 +1,22 @@
+@(persForm: Form[Person])
+
+@import helper._
+
+@main("Add new person") {
+    
+    
+    <h1>Add a new person</h1>
+    
+    @form(routes.PersonController.newPerson) {
+        
+        @inputText(persForm("name"))
+        @inputText(persForm("midname"))
+        @inputText(persForm("lastname"))
+        @inputText(persForm("passport"))
+        @inputText(persForm("wanted")) 
+        
+        <input type="submit" value="Create">
+        
+    }
+    
+}
