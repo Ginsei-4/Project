@@ -1,0 +1,27 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# ~~~~
+
+# Home page
+GET     /                           controllers.Application.index
+
+# Person
+GET		/addperson					controllers.PersonController.person
+POST	/addperson					controllers.PersonController.newPerson
+GET		/persons					controllers.PersonController.viewPerson
+POST	/persons/:id/delete			controllers.PersonController.deletePerson(id: Long)
+
+# Weapon
+GET		/addweapon					controllers.WeaponController.weapon
+POST	/addweapon					controllers.WeaponController.newWeapon
+GET		/weapons					controllers.WeaponController.viewWeapon
+POST	/weapons/:id/delete			controllers.WeaponController.deleteWeapon(id: Long)
+
+# Person
+GET		/addvehicle					controllers.VehicleController.vehicle
+POST	/addvehicle					controllers.VehicleController.newVehicle
+GET		/vehicles					controllers.VehicleController.viewVehicle
+POST	/vehicles/:id/delete		controllers.VehicleController.deleteVehicle(id: Long)
+
+# Map static resources from the /public folder to the /assets URL path
+GET     /assets/*file               controllers.Assets.at(path="/public", file)
