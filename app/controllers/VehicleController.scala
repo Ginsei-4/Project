@@ -8,6 +8,7 @@ import models.Vehicle
 import anorm._
 
 object VehicleController extends Controller {
+  
 	def newVehicle = Action { implicit request =>
 	  vehicleForm.bindFromRequest.fold(
 	    errors => BadRequest(views.html.vehicle(errors)),
@@ -40,6 +41,18 @@ object VehicleController extends Controller {
 	
 	def deleteVehicle(id: Long) = Action {
 		Vehicle.delete(id)
+		Redirect(routes.VehicleController.viewVehicle)
+	}
+	
+	def editVehicle(id: Long) = Action {
+		val bindedForm = vehicleForm.fill(Vehicle.getvehicle(id))
+		Ok(views.html.vehicleedit(bindedForm))
+	}
+	
+	def updateVehicle(id: Long) = Action { implicit request =>
+		val vehicle = vehicleForm.bindFromRequest.get
+		Vehicle.delete(id)
+		Vehicle.update(id, vehicle)
 		Redirect(routes.VehicleController.viewVehicle)
 	}
 }

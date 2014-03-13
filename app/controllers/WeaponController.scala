@@ -8,6 +8,7 @@ import models.Weapon
 import anorm._
 
 object WeaponController extends Controller {
+  
 	def newWeapon = Action { implicit request =>
 	  weaponForm.bindFromRequest.fold(
 	    errors => BadRequest(views.html.weapon(errors)),
@@ -38,6 +39,18 @@ object WeaponController extends Controller {
 	
 	def deleteWeapon(id: Long) = Action {
 		Weapon.delete(id)
+		Redirect(routes.WeaponController.viewWeapon)
+	}
+	
+	def editWeapon(id: Long) = Action {
+		val bindedForm = weaponForm.fill(Weapon.getweapon(id))
+		Ok(views.html.weaponedit(bindedForm))
+	}
+	
+	def updateWeapon(id: Long) = Action { implicit request =>
+		val weapon = weaponForm.bindFromRequest.get
+		Weapon.delete(id)
+		Weapon.update(id, weapon)
 		Redirect(routes.WeaponController.viewWeapon)
 	}
 }

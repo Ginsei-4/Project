@@ -19,6 +19,9 @@
                 @form(routes.VehicleController.deleteVehicle(v.id.get)) {
                     <input type="submit" value="Delete">
                 }
+                @form(routes.VehicleController.editVehicle(v.id.get)) {
+                    <input type="submit" value="Update">
+                }
             </li>
         }
     </ul>

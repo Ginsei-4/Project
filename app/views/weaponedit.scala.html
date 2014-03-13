@@ -1,0 +1,21 @@
+@(weaponForm: Form[Weapon])
+
+@import helper._
+
+@main("Edit weapon") {
+    
+    
+    <h1>Edit weapon</h1>
+    
+    @form(routes.WeaponController.updateWeapon(weaponForm.get.id.get)) {
+        
+        @inputText(weaponForm("wType"))
+        @inputText(weaponForm("producer"))
+        @inputText(weaponForm("wModel"))
+        @inputText(weaponForm("status")) 
+        
+        <input type="submit" value="Update">
+        
+    }
+    
+}

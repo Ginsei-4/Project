@@ -33,11 +33,32 @@ object Weapon{
 		}
 	}
 	
+	def update(id:Long, weapon: Weapon) {
+		DB.withConnection { implicit c =>
+			SQL("insert into weapon (id, wType, producer, wModel, status) values ({id}, {wType}, {producer}, {wModel}, {status})").on(
+	    		'id -> id,
+			    'wType -> weapon.wType,
+	    		'producer -> weapon.producer,
+	    		'wModel -> weapon.wModel,
+	    		'status -> weapon.status
+			).executeUpdate()
+		}
+	}
+	
 	def delete(id: Long) {
 		DB.withConnection { implicit c =>
 			SQL("delete from weapon where id = {id}").on(
 				'id -> id
 			).executeUpdate()
 		}
+	}
+	
+	def getweapon(id: Long): Weapon = {
+		val list = DB.withConnection { implicit c =>
+			SQL("select * from weapon where id = {id}").on(
+				'id -> id
+			).as(weapon *)
+		}
+		list(0)
 	}
 }

@@ -1,0 +1,22 @@
+@(persForm: Form[Person])
+
+@import helper._
+
+@main("Edit person") {
+    
+    
+    <h1>Edit person</h1>
+    
+    @form(routes.PersonController.updatePerson(persForm.get.id.get)) {
+        
+        @inputText(persForm("name"))
+        @inputText(persForm("midname"))
+        @inputText(persForm("lastname"))
+        @inputText(persForm("passport"))
+        @inputText(persForm("wanted")) 
+        
+        <input type="submit" value="Update">
+        
+    }
+    
+}

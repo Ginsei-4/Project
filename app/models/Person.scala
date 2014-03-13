@@ -36,7 +36,7 @@ object Person{
 		}
 	}
 	
-		def update(id:Long, person: Person) {
+	def update(id:Long, person: Person) {
 		DB.withConnection { implicit c =>
 			SQL("insert into person (id, name, midname, lastname, passport, wanted) values ({id}, {name}, {midname}, {lastname}, {passport}, {wanted})").on(
 	    		'id -> id,

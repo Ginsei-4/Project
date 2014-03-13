@@ -17,6 +17,9 @@
                 @form(routes.WeaponController.deleteWeapon(w.id.get)) {
                     <input type="submit" value="Delete">
                 }
+                @form(routes.WeaponController.editWeapon(w.id.get)) {
+                    <input type="submit" value="Update">
+                }
             </li>
         }
     </ul>

@@ -1,0 +1,23 @@
+@(vehicleForm: Form[Vehicle])
+
+@import helper._
+
+@main("Edit vehicle") {
+    
+    
+    <h1>Edit vehicle</h1>
+    
+    @form(routes.VehicleController.updateVehicle(vehicleForm.get.id.get)) {
+        
+        @inputText(vehicleForm("technumber"))
+        @inputText(vehicleForm("vType"))
+        @inputText(vehicleForm("producer"))
+        @inputText(vehicleForm("vModel"))
+        @inputText(vehicleForm("stolen"))
+        @inputText(vehicleForm("wanted")) 
+        
+        <input type="submit" value="Update">
+        
+    }
+    
+}

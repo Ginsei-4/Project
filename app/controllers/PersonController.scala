@@ -6,9 +6,9 @@ import play.api.data._
 import play.api.data.Forms._
 import models.Person
 import anorm._
-import views.html._
 
 object PersonController extends Controller {
+  
 	def newPerson = Action { implicit request =>
 	  persForm.bindFromRequest.fold(
 	    errors => BadRequest(views.html.person(errors)),
