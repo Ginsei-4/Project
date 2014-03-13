@@ -18,6 +18,9 @@
                 @form(routes.PersonController.deletePerson(pers.id.get)) {
                     <input type="submit" value="Delete">
                 }
+                @form(routes.PersonController.editPerson(pers.id.get)) {
+                    <input type="submit" value="Update">
+                }
             </li>
         }
     </ul>

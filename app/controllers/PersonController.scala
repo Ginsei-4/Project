@@ -6,6 +6,7 @@ import play.api.data._
 import play.api.data.Forms._
 import models.Person
 import anorm._
+import views.html._
 
 object PersonController extends Controller {
 	def newPerson = Action { implicit request =>
@@ -41,4 +42,18 @@ object PersonController extends Controller {
 		Person.delete(id)
 		Redirect(routes.PersonController.viewPerson)
 	}
+	
+	def editPerson(id: Long) = Action {
+		val bindedForm = persForm.fill(Person.getpers(id))
+		Ok(views.html.persedit(bindedForm))
+	}
+	
+	def updatePerson(id: Long) = Action { implicit request =>
+		val person = persForm.bindFromRequest.get
+		Person.delete(id)
+		Person.update(id, person)
+		Redirect(routes.PersonController.viewPerson)
+	}
+
+
 }

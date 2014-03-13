@@ -36,11 +36,33 @@ object Person{
 		}
 	}
 	
+		def update(id:Long, person: Person) {
+		DB.withConnection { implicit c =>
+			SQL("insert into person (id, name, midname, lastname, passport, wanted) values ({id}, {name}, {midname}, {lastname}, {passport}, {wanted})").on(
+	    		'id -> id,
+			    'name -> person.name,
+	    		'midname -> person.midname,
+	    		'lastname -> person.lastname,
+	    		'passport -> person.passport,
+	    		'wanted -> person.wanted
+			).executeUpdate()
+		}
+	}
+	
 	def delete(id: Long) {
 		DB.withConnection { implicit c =>
 			SQL("delete from person where id = {id}").on(
 				'id -> id
 			).executeUpdate()
 		}
+	}
+	
+	def getpers(id: Long): Person = {
+		val list = DB.withConnection { implicit c =>
+			SQL("select * from person where id = {id}").on(
+				'id -> id
+			).as(person *)
+		}
+		list(0)
 	}
 }

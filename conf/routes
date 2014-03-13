@@ -10,6 +10,9 @@ GET		/addperson					controllers.PersonController.person
 POST	/addperson					controllers.PersonController.newPerson
 GET		/persons					controllers.PersonController.viewPerson
 POST	/persons/:id/delete			controllers.PersonController.deletePerson(id: Long)
+GET		/persons/:id/edit			controllers.PersonController.editPerson(id: Long)
+POST	/persons/:id				controllers.PersonController.updatePerson(id: Long)
+
 
 # Weapon
 GET		/addweapon					controllers.WeaponController.weapon
