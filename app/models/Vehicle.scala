@@ -6,7 +6,7 @@ import anorm.SqlParser._
 import play.api.db._
 import play.api.Play.current
 
-case class Vehicle(id: Pk[Long], technumber:String, vType:String, producer:String, vModel:String, stolen:Boolean, wanted:Boolean)
+case class Vehicle(id: Pk[Long], technumber:String, vType:String, producer:String, vModel:String, stolen:Boolean, wanted:Boolean, ownerID: Option[Long])
 
 object Vehicle{
 	val vehicle = {
@@ -16,8 +16,9 @@ object Vehicle{
 		get[String]("producer") ~ 
 		get[String]("vModel") ~ 
 		get[Boolean]("stolen") ~ 
-		get[Boolean]("wanted") map {
-			case id~technumber~vType~producer~vModel~stolen~wanted => Vehicle(id, technumber, vType, producer, vModel, stolen, wanted)
+		get[Boolean]("wanted") ~ 
+		get[Option[Long]]("ownerID") map {
+			case id~technumber~vType~producer~vModel~stolen~wanted~ownerID => Vehicle(id, technumber, vType, producer, vModel, stolen, wanted, ownerID)
 		}
 	}
   
@@ -26,27 +27,29 @@ object Vehicle{
 	}
 	def create(vehicle: Vehicle) {
 		DB.withConnection { implicit c =>
-			SQL("insert into vehicle (technumber, vType, producer, vModel, stolen, wanted) values ({technumber}, {vType}, {producer}, {vModel}, {stolen}, {wanted})").on(
+			SQL("insert into vehicle (technumber, vType, producer, vModel, stolen, wanted, ownerID) values ({technumber}, {vType}, {producer}, {vModel}, {stolen}, {wanted}, {ownerID})").on(
 	    		'technumber -> vehicle.technumber,
 	    		'vType -> vehicle.vType,
 	    		'producer -> vehicle.producer,
 	    		'vModel -> vehicle.vModel,
 	    		'stolen -> vehicle.stolen,
-	    		'wanted -> vehicle.wanted
+	    		'wanted -> vehicle.wanted,
+	    		'ownerID -> vehicle.ownerID
 			).executeUpdate()
 		}
 	}
 	
 	def update(id:Long, vehicle: Vehicle) {
 		DB.withConnection { implicit c =>
-			SQL("insert into vehicle (id, technumber, vType, producer, vModel, stolen, wanted) values ({id}, {technumber}, {vType}, {producer}, {vModel}, {stolen}, {wanted})").on(
+			SQL("insert into vehicle (id, technumber, vType, producer, vModel, stolen, wanted, ownerID) values ({id}, {technumber}, {vType}, {producer}, {vModel}, {stolen}, {wanted}, {ownerID})").on(
 	    		'id -> id,
 			    'technumber -> vehicle.technumber,
 	    		'vType -> vehicle.vType,
 	    		'producer -> vehicle.producer,
 	    		'vModel -> vehicle.vModel,
 	    		'stolen -> vehicle.stolen,
-	    		'wanted -> vehicle.wanted
+	    		'wanted -> vehicle.wanted,
+	    		'ownerID -> vehicle.ownerID
 			).executeUpdate()
 		}
 	}

@@ -16,6 +16,7 @@
         		@v.vModel
         		@v.stolen
         		@v.wanted 
+        		@v.ownerID
                 @form(routes.VehicleController.deleteVehicle(v.id.get)) {
                     <input type="submit" value="Delete">
                 }

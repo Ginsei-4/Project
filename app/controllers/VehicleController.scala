@@ -27,7 +27,8 @@ object VehicleController extends Controller {
 	    	"producer" -> nonEmptyText,
 	    	"vModel" -> nonEmptyText,
 	    	"stolen" -> boolean,
-	    	"wanted" -> boolean
+	    	"wanted" -> boolean,
+	    	"ownerID" -> optional(longNumber)
 	    )(Vehicle.apply)(Vehicle.unapply)
 	)
 	

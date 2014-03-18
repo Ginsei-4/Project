@@ -25,7 +25,8 @@ object WeaponController extends Controller {
 			"wType" -> nonEmptyText,
 	    	"producer" -> nonEmptyText,
 	    	"wModel" -> nonEmptyText,
-	    	"status" -> nonEmptyText
+	    	"status" -> nonEmptyText,
+	    	"ownerID" -> optional(longNumber)
 	    )(Weapon.apply)(Weapon.unapply)
 	)
 	

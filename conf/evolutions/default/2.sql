@@ -8,7 +8,8 @@ CREATE TABLE weapon (
     wType varchar(255),
     producer varchar(255),
     wModel varchar(255),
-    status varchar(255)
+    status varchar(255),
+    ownerID integer
 
 );
  

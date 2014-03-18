@@ -6,7 +6,7 @@ import anorm.SqlParser._
 import play.api.db._
 import play.api.Play.current
 
-case class Weapon(id: Pk[Long], wType:String, producer:String, wModel:String, status:String)
+case class Weapon(id: Pk[Long], wType:String, producer:String, wModel:String, status:String, ownerID: Option[Long])
 
 object Weapon{
 	val weapon = {
@@ -14,8 +14,9 @@ object Weapon{
 		get[String]("wType") ~ 
 		get[String]("producer") ~ 
 		get[String]("wModel") ~ 
-		get[String]("status") map {
-			case id~wType~producer~wModel~status => Weapon(id, wType, producer, wModel, status)
+		get[String]("status") ~ 
+		get[Option[Long]]("ownerID") map {
+			case id~wType~producer~wModel~status~ownerID => Weapon(id, wType, producer, wModel, status, ownerID)
 		}
 	}
   
@@ -24,23 +25,25 @@ object Weapon{
 	}
 	def create(weapon: Weapon) {
 		DB.withConnection { implicit c =>
-			SQL("insert into weapon (wType, producer, wModel, status) values ({wType}, {producer}, {wModel}, {status})").on(
+			SQL("insert into weapon (wType, producer, wModel, status, ownerID) values ({wType}, {producer}, {wModel}, {status}, {ownerID})").on(
 	    		'wType -> weapon.wType,
 	    		'producer -> weapon.producer,
 	    		'wModel -> weapon.wModel,
-	    		'status -> weapon.status
+	    		'status -> weapon.status,
+	    		'ownerID -> weapon.ownerID
 			).executeUpdate()
 		}
 	}
 	
 	def update(id:Long, weapon: Weapon) {
 		DB.withConnection { implicit c =>
-			SQL("insert into weapon (id, wType, producer, wModel, status) values ({id}, {wType}, {producer}, {wModel}, {status})").on(
+			SQL("insert into weapon (id, wType, producer, wModel, status, ownerID) values ({id}, {wType}, {producer}, {wModel}, {status}, {ownerID})").on(
 	    		'id -> id,
 			    'wType -> weapon.wType,
 	    		'producer -> weapon.producer,
 	    		'wModel -> weapon.wModel,
-	    		'status -> weapon.status
+	    		'status -> weapon.status,
+	    		'ownerID -> weapon.ownerID
 			).executeUpdate()
 		}
 	}

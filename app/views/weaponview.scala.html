@@ -13,7 +13,8 @@
                 @w.wType
                 @w.producer
         		@w.wModel
-        		@w.status 
+        		@w.status
+        		@w.ownerID 
                 @form(routes.WeaponController.deleteWeapon(w.id.get)) {
                     <input type="submit" value="Delete">
                 }

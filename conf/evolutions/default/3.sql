@@ -10,7 +10,8 @@ CREATE TABLE vehicle (
     producer varchar(255),
     vModel varchar(255),
     stolen bit,
-    wanted bit
+    wanted bit,
+    ownerID integer
 
 );
  
