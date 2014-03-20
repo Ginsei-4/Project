@@ -2,9 +2,11 @@ package models
 
 import anorm._
 import anorm.SqlParser._
-
 import play.api.db._
 import play.api.Play.current
+import play.api.libs.json.Writes
+import play.api.libs.json.Json
+import play.api.libs.json.JsValue
 
 case class Person(id: Pk[Long], name:String, midname:String, lastname:String, passport:String, wanted:Boolean)
 
@@ -18,6 +20,16 @@ object Person{
 		get[Boolean]("wanted") map {
 			case id~name~midname~lastname~passport~wanted => Person(id, name, midname, lastname, passport, wanted)
 		}
+	}
+	
+	implicit val PersonWrites = new Writes[Person] {
+		def writes(person: Person) = Json.obj(
+			"name" -> person.name,
+	    	"midname" -> person.midname,
+	    	"lastname" -> person.lastname,
+	    	"passport" -> person.passport,
+	    	"wanted" -> person.wanted
+		)
 	}
   
 	def all(): List[Person] = DB.withConnection { implicit c =>
@@ -64,5 +76,14 @@ object Person{
 			).as(person *)
 		}
 		list(0)
+	}
+	
+	def findPerson(info: JsValue) = {
+		val req = Search.makeRequest("person",info)
+	
+		val result = DB.withConnection { implicit c =>
+			SQL(req).as(person *)
+		}
+		Json.toJson(result)
 	}
 }

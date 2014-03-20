@@ -2,9 +2,10 @@ package models
 
 import anorm._
 import anorm.SqlParser._
-
 import play.api.db._
 import play.api.Play.current
+import play.api.libs.json.Writes
+import play.api.libs.json.Json
 
 case class Vehicle(id: Pk[Long], technumber:String, vType:String, producer:String, vModel:String, stolen:Boolean, wanted:Boolean, ownerID: Option[Long])
 
@@ -20,6 +21,18 @@ object Vehicle{
 		get[Option[Long]]("ownerID") map {
 			case id~technumber~vType~producer~vModel~stolen~wanted~ownerID => Vehicle(id, technumber, vType, producer, vModel, stolen, wanted, ownerID)
 		}
+	}
+	
+	implicit val VehicleWrites = new Writes[Vehicle] {
+		def writes(vehicle: Vehicle) = Json.obj(
+			"technumber" -> vehicle.technumber,
+	    	"vType" -> vehicle.vType,
+	    	"producer" -> vehicle.producer,
+	    	"vModel" -> vehicle.vModel,
+	    	"stolen" -> vehicle.stolen,
+	    	"wanted" -> vehicle.wanted,
+	    	"ownerID" -> vehicle.ownerID
+		)
 	}
   
 	def all(): List[Vehicle] = DB.withConnection { implicit c =>
