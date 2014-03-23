@@ -6,6 +6,7 @@ import play.api.data._
 import play.api.data.Forms._
 import models.Person
 import anorm._
+import play.api.libs.json.Json
 
 object PersonController extends Controller {
   
@@ -53,6 +54,12 @@ object PersonController extends Controller {
 		Person.delete(id)
 		Person.update(id, person)
 		Redirect(routes.PersonController.viewPerson)
+	}
+	
+	def findPerson(info: String) = Action {
+		val jinfo = Json.parse(info)
+		//Ok(info)
+		Ok(Person.find(Json.parse(info)))
 	}
 
 

@@ -78,7 +78,7 @@ object Person{
 		list(0)
 	}
 	
-	def findPerson(info: JsValue) = {
+	def find(info: JsValue) = {
 		val req = Search.makeRequest("person",info)
 	
 		val result = DB.withConnection { implicit c =>
