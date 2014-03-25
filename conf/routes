@@ -13,6 +13,7 @@ POST	/persons/:id/delete			controllers.PersonController.deletePerson(id: Long)
 GET		/persons/:id/edit			controllers.PersonController.editPerson(id: Long)
 POST	/persons/:id				controllers.PersonController.updatePerson(id: Long)
 GET		/findperson					controllers.PersonController.findPerson(info: String)
+GET		/findperson/byid			controllers.PersonController.getPerson(id: Long)
 
 
 # Weapon
@@ -23,6 +24,8 @@ POST	/weapons/:id/delete			controllers.WeaponController.deleteWeapon(id: Long)
 GET		/weapons/:id/edit			controllers.WeaponController.editWeapon(id: Long)
 POST	/weapons/:id				controllers.WeaponController.updateWeapon(id: Long)
 GET		/findweapon					controllers.WeaponController.findWeapon(info: String)
+GET		/findweapon/byid			controllers.WeaponController.getWeapon(id: Long)
+GET		/findweapon/byownerid		controllers.WeaponController.getWeaponByOwnerID(id: Long)
 
 # Vehicle
 GET		/addvehicle					controllers.VehicleController.vehicle
@@ -32,6 +35,8 @@ POST	/vehicles/:id/delete		controllers.VehicleController.deleteVehicle(id: Long)
 GET		/vehicles/:id/edit			controllers.VehicleController.editVehicle(id: Long)
 POST	/vehicles/:id				controllers.VehicleController.updateVehicle(id: Long)
 GET		/findvehicle				controllers.VehicleController.findVehicle(info: String)
+GET		/findvehicle/byid			controllers.VehicleController.getVehicle(id: Long)
+GET		/findvehicle/byownerid		controllers.VehicleController.getVehicleByOwnerID(id: Long)
 
 
 # Map static resources from the /public folder to the /assets URL path

@@ -93,4 +93,13 @@ object Vehicle{
 		}
 		result
 	}
+	
+	def getByOwnerID(id: Long): Vehicle = {
+		val list = DB.withConnection { implicit c =>
+			SQL("select * from vehicle where ownerID = {id}").on(
+				'id -> id
+			).as(vehicle *)
+		}
+		list(0)
+	}
 }

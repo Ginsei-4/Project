@@ -61,4 +61,12 @@ object VehicleController extends Controller {
 	def findVehicle(info: String) = Action {
 		Ok(Json.toJson(Vehicle.find(Json.parse(info))))
 	}
+	
+	def getVehicle(id: Long) = Action {
+	  Ok(Json.toJson(Vehicle.getvehicle(id)))
+	}
+	
+	def getVehicleByOwnerID(id: Long) = Action {
+	  Ok(Json.toJson(Vehicle.getByOwnerID(id)))
+	}
 }

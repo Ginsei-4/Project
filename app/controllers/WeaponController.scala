@@ -59,4 +59,12 @@ object WeaponController extends Controller {
 	def findWeapon(info: String) = Action {
 		Ok(Json.toJson(Weapon.find(Json.parse(info))))
 	}
+	
+	def getWeapon(id: Long) = Action {
+	  Ok(Json.toJson(Weapon.getweapon(id)))
+	}
+	
+	def getWeaponByOwnerID(id: Long) = Action {
+	  Ok(Json.toJson(Weapon.getByOwnerID(id)))
+	}
 }

@@ -85,4 +85,13 @@ object Weapon{
 		}
 		result
 	}
+	
+	def getByOwnerID(id: Long): Weapon = {
+		val list = DB.withConnection { implicit c =>
+			SQL("select * from weapon where ownerID = {id}").on(
+				'id -> id
+			).as(weapon *)
+		}
+		list(0)
+	}
 }
