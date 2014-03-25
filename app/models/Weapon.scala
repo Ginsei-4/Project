@@ -6,6 +6,7 @@ import play.api.db._
 import play.api.Play.current
 import play.api.libs.json.Writes
 import play.api.libs.json.Json
+import play.api.libs.json.JsValue
 
 case class Weapon(id: Pk[Long], wType:String, producer:String, wModel:String, status:String, ownerID: Option[Long])
 
@@ -74,5 +75,14 @@ object Weapon{
 			).as(weapon *)
 		}
 		list(0)
+	}
+	
+	def find(info: JsValue) = {
+		val req = Search.makeRequest("weapon",info)
+	
+		val result = DB.withConnection { implicit c =>
+			SQL(req).as(weapon *)
+		}
+		result
 	}
 }

@@ -84,6 +84,6 @@ object Person{
 		val result = DB.withConnection { implicit c =>
 			SQL(req).as(person *)
 		}
-		Json.toJson(result)
+		result
 	}
 }

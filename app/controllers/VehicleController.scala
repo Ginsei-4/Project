@@ -6,6 +6,7 @@ import play.api.data._
 import play.api.data.Forms._
 import models.Vehicle
 import anorm._
+import play.api.libs.json.Json
 
 object VehicleController extends Controller {
   
@@ -55,5 +56,9 @@ object VehicleController extends Controller {
 		Vehicle.delete(id)
 		Vehicle.update(id, vehicle)
 		Redirect(routes.VehicleController.viewVehicle)
+	}
+	
+	def findVehicle(info: String) = Action {
+		Ok(Json.toJson(Vehicle.find(Json.parse(info))))
 	}
 }

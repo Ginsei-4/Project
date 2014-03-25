@@ -22,6 +22,7 @@ GET		/weapons					controllers.WeaponController.viewWeapon
 POST	/weapons/:id/delete			controllers.WeaponController.deleteWeapon(id: Long)
 GET		/weapons/:id/edit			controllers.WeaponController.editWeapon(id: Long)
 POST	/weapons/:id				controllers.WeaponController.updateWeapon(id: Long)
+GET		/findweapon					controllers.WeaponController.findWeapon(info: String)
 
 # Vehicle
 GET		/addvehicle					controllers.VehicleController.vehicle
@@ -30,6 +31,7 @@ GET		/vehicles					controllers.VehicleController.viewVehicle
 POST	/vehicles/:id/delete		controllers.VehicleController.deleteVehicle(id: Long)
 GET		/vehicles/:id/edit			controllers.VehicleController.editVehicle(id: Long)
 POST	/vehicles/:id				controllers.VehicleController.updateVehicle(id: Long)
+GET		/findvehicle				controllers.VehicleController.findVehicle(info: String)
 
 
 # Map static resources from the /public folder to the /assets URL path

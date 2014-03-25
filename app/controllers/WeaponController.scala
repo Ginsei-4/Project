@@ -6,6 +6,7 @@ import play.api.data._
 import play.api.data.Forms._
 import models.Weapon
 import anorm._
+import play.api.libs.json.Json
 
 object WeaponController extends Controller {
   
@@ -53,5 +54,9 @@ object WeaponController extends Controller {
 		Weapon.delete(id)
 		Weapon.update(id, weapon)
 		Redirect(routes.WeaponController.viewWeapon)
+	}
+	
+	def findWeapon(info: String) = Action {
+		Ok(Json.toJson(Weapon.find(Json.parse(info))))
 	}
 }

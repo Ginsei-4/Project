@@ -6,6 +6,7 @@ import play.api.db._
 import play.api.Play.current
 import play.api.libs.json.Writes
 import play.api.libs.json.Json
+import play.api.libs.json.JsValue
 
 case class Vehicle(id: Pk[Long], technumber:String, vType:String, producer:String, vModel:String, stolen:Boolean, wanted:Boolean, ownerID: Option[Long])
 
@@ -82,5 +83,14 @@ object Vehicle{
 			).as(vehicle *)
 		}
 		list(0)
+	}
+	
+	def find(info: JsValue) = {
+		val req = Search.makeRequest("vehicle",info)
+	
+		val result = DB.withConnection { implicit c =>
+			SQL(req).as(vehicle *)
+		}
+		result
 	}
 }

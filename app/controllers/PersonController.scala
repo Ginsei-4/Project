@@ -57,10 +57,7 @@ object PersonController extends Controller {
 	}
 	
 	def findPerson(info: String) = Action {
-		val jinfo = Json.parse(info)
-		//Ok(info)
-		Ok(Person.find(Json.parse(info)))
+		Ok(Json.toJson(Person.find(Json.parse(info))))
 	}
-
-
+	
 }
